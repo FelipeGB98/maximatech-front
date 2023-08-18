@@ -1,0 +1,62 @@
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+<form>
+  <img src="assets/maxima.png">
+
+  <h3>Cadastro de cliente</h3>
+
+
+  <input type="text"   placeholder="Nome" class="form-control" name="nome" [(ngModel)]="cliente.nome" required>
+  <input type="number" placeholder="CNPJ" class="form-control" name="cnpj" [(ngModel)]="cliente.cnpj" required pattern="[0-9]{14}" title="Somente numeros">
+  <input type="text"   placeholder="Endereco" class="form-control" name="endereco" [(ngModel)]="cliente.endereco">
+
+
+  <input type="button" value="Cadastrar" *ngIf="btnCadastro" class="btn btn-primary"    (click)="cadastrar()">
+  <input type="button" value="Alterar"   *ngIf="!btnCadastro" class="btn btn-warning"   (click)="editar()">
+  <input type="button" value="Remover"   *ngIf="!btnCadastro" class="btn btn-danger"    (click)="remover()">
+  <input type="button" value="Cancelar"  *ngIf="!btnCadastro" class="btn btn-secondary" (click)="cancelar()">
+
+</form>
+
+<form>
+  <h3>Filtrar por Nome e/ou CNPJ</h3>
+  <input type="text" placeholder="Nome" class="form-control" name="filtroNome" [(ngModel)]="filtroNome">
+  <input type="number" placeholder="CNPJ" class="form-control" name="filtroCnpj" [(ngModel)]="filtroCnpj" pattern="[0-9]{14}" title="Somente numeros">
+
+  <input type="button" value="Filtrar" class="btn btn-primary" (click)="filtrar()">
+</form>
+
+<table class="table" *ngIf="clientes.length > 0">
+  <!-- ... table header ... -->
+  <tbody>
+    <tr *ngFor="let c of clientes; index as i">
+      <!-- ... table row ... -->
+    </tr>
+  </tbody>
+</table>
+
+<table class="table" *ngIf="tabela">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nome</th>
+      <th>CNPJ</th>
+      <th>Endereco</th>
+      <th>Selecionar</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let c of clientes; index as i">
+      <td>{{i+1}}</td>
+      <td>{{c.nome}}</td>
+      <td>{{c.cnpj}}</td>
+      <td>{{c.endereco}}</td>
+      <td><button class="btn btn-success" (click)="selecionarCliente(i)">Selecionar</button></td>
+    </tr>
+  </tbody>
+
+
+</table>
+
+
